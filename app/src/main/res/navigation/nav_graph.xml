@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/ICSListFragment">
+
+    <fragment
+        android:id="@+id/ICSListFragment"
+        android:name="ru.desh.structuralfunctionalmodelcalculator.ui.fragment.ICSListFragment"
+        android:label="Список ИС для оценки качества"
+        tools:layout="@layout/fragment_ics_list">
+
+        <action
+            android:id="@+id/action_ICSList_To_ICSDetails"
+            app:destination="@id/ICSDetailsFragment">
+            <argument
+                android:name="arg_current_ics_id"
+                app:argType="long"
+                android:defaultValue="0L"/>
+        </action>
+
+        <action
+            android:id="@+id/action_ICSList_To_CreateICS"
+            app:destination="@id/CreateICSFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ICSDetailsFragment"
+        android:name="ru.desh.structuralfunctionalmodelcalculator.ui.fragment.ICSDetailsFragment"
+        android:label="Подробности об ИС"
+        tools:layout="@layout/fragment_ics_details">
+        <argument
+            android:name="arg_current_ics_id"
+            app:argType="long"
+            android:defaultValue="0L"/>
+
+        <action
+            android:id="@+id/action_ICSDetails_To_ICSList"
+            app:destination="@id/ICSListFragment" />
+
+        <action
+            android:id="@+id/action_ICSDetails_To_SFMFunctions"
+            app:destination="@id/SFMFunctionsFragment" >
+            <argument
+                android:name="arg_current_ics_id"
+                app:argType="long"
+                android:defaultValue="0L"/>
+            <argument
+                android:name="arg_real_sfm_id"
+                app:argType="long"
+                android:defaultValue="0L"/>
+            <argument
+                android:name="arg_is_base_sfm"
+                app:argType="boolean"
+                android:defaultValue="true" />
+        </action>
+
+        <action
+            android:id="@+id/action_ICSDetails_To_Visualisation"
+            app:destination="@id/SFMComparisonVisualisationFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/SFMComparisonVisualisationFragment"
+        android:name="ru.desh.structuralfunctionalmodelcalculator.ui.fragment.ComparisonVisualisationFragment"
+        android:label="Функции ИКС"
+        tools:layout="@layout/fragment_comparison_visualisation">
+
+        <action
+            android:id="@+id/action_SFMVisualisation_To_ICSDetails"
+            app:destination="@id/ICSDetailsFragment" />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/CreateICSFragment"
+        android:name="ru.desh.structuralfunctionalmodelcalculator.ui.fragment.CreateICSFragment"
+        android:label="Создание проекта ИС"
+        tools:layout="@layout/fragment_create_ics">
+
+        <action
+            android:id="@+id/action_ICSCreation_To_ICSList"
+            app:destination="@id/ICSListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SFMFunctionsFragment"
+        android:name="ru.desh.structuralfunctionalmodelcalculator.ui.fragment.SFMFunctionsFragment"
+        android:label="Функции ИС"
+        tools:layout="@layout/fragment_sfm_functions">
+
+        <argument
+            android:name="arg_current_ics_id"
+            app:argType="long"
+            android:defaultValue="0L"/>
+        <argument
+            android:name="arg_real_sfm_id"
+            app:argType="long"
+            android:defaultValue="0L"/>
+        <argument
+            android:name="arg_is_base_sfm"
+            app:argType="boolean"
+            android:defaultValue="true" />
+
+        <action
+            android:id="@+id/action_SFMFunctions_To_ICSDetails"
+            app:destination="@id/ICSDetailsFragment" />
+        <action
+            android:id="@+id/action_SFMFunctions_To_TechnicalSystems"
+            app:destination="@id/TechnicalSystemsFragment">
+            <argument
+                android:name="arg_current_ics_id"
+                app:argType="long"
+                android:defaultValue="0L"/>
+            <argument
+                android:name="arg_real_sfm_id"
+                app:argType="long"
+                android:defaultValue="0L"/>
+            <argument
+                android:name="arg_is_base_sfm"
+                app:argType="boolean"
+                android:defaultValue="true" />
+            <argument
+                android:name="arg_sfm_function_id"
+                app:argType="long"
+                android:defaultValue="0L" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/TechnicalSystemsFragment"
+        android:name="ru.desh.structuralfunctionalmodelcalculator.ui.fragment.TechnicalSystemsFragment"
+        android:label="Параметры ТС"
+        tools:layout="@layout/fragment_technical_systems">
+
+        <argument
+            android:name="arg_current_ics_id"
+            app:argType="long"
+            android:defaultValue="0L"/>
+        <argument
+            android:name="arg_real_sfm_id"
+            app:argType="long"
+            android:defaultValue="0L"/>
+        <argument
+            android:name="arg_is_base_sfm"
+            app:argType="boolean"
+            android:defaultValue="true" />
+        <argument
+            android:name="arg_sfm_function_id"
+            app:argType="long"
+            android:defaultValue="0L" />
+
+        <action
+            android:id="@+id/action_TechnicalSystems_To_SFMFunctions"
+            app:destination="@id/SFMFunctionsFragment" />
+
+
+    </fragment>
+</navigation>
